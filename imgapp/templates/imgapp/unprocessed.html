@@ -15,6 +15,7 @@
                             <th>Status <span class="caret"></span></th>
                             <th>Rcv Date <span class="caret"></span></th>
                             <th>Rcv Time <span class="caret"></span></th>
+                            <th>Local Exists <span class="caret"></span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,7 @@
                                     <td>{{ u.processed }}</td>
                                     <td>{{ u.receive_date }}</td>
                                     <td>{{ u.receive_time }}</td>
+                                    <td>{{ u|get_path_exists }}</td>
                                 </tr>
                             {% endfor %}
                         {% else %}

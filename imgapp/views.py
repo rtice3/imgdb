@@ -15,12 +15,16 @@ def unprocessed_img(request):
     return render(request, 'imgapp/unprocessed.html', {'unprocessed_list': unprocessed_list})
 
 
+def unprocessed_serial_search(request, serial):
+    unprocessed_list = UnprocessedImg.objects.filter(serial__exact=serial)
+    return render(request, 'imgapp/unprocessed.html', {'unprocessed_list': unprocessed_list})
+
+
 def processed_img(request):
     processed_list = ProcessedImg.objects.all()
     return render(request, 'imgapp/processed.html', {'processed_list': processed_list})
 
 
-def serial_search(request, serial):
-    pass
-
-
+def processed_serial_search(request, serial):
+    processed_list = ProcessedImg.objects.filter(serial__exact=serial)
+    return render(request, 'imgapp/processed.html', {'processed_list': processed_list})
