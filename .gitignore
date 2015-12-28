@@ -57,3 +57,9 @@ docs/_build/
 target/
 .idea
 
+# OSX stuff:
+.DS_Store
+
+# FTP Stuff
+ftp
+*.jpg
