@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	{% include "imgapp/head.html" %}
+	<body>
+        {% load filters %}
+		{% include "imgapp/navbar.html" %}
+		<div class="container-fluid">
+            <h1 class="page-header">Dashboard</h1>
+            <h2 class="sub-header">Unprocessed Images</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID <span class="caret"></span></th>
+                            <th>Serial <span class="caret"></span></th>
+                            <th>Status <span class="caret"></span></th>
+                            <th>Rcv Date <span class="caret"></span></th>
+                            <th>Rcv Time <span class="caret"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if unprocessed_list %}
+                            {% for u in unprocessed_list %}
+                                <tr onclick="get_image('{{ u.id }}')">
+                                    <td>{{ u.id }}</td>
+                                    <td>{{ u.serial }}</td>
+                                    <td>{{ u.processed }}</td>
+                                    <td>{{ u.receive_date }}</td>
+                                    <td>{{ u.receive_time }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <p>No images available.</p>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+		</div>
+        {% include "imgapp/footer.html" %}
+	</body>
+</html>

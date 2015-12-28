@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+	{% include "imgapp/head.html" %}
+	<body>
+        {% load filters %}
+		{% include "imgapp/navbar.html" %}
+		<div class="container-fluid">
+            <h1 class="page-header">Dashboard</h1>
+            <h2 class="sub-header">Processed Images</h2>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID <span class="caret"></span></th>
+                            <th>Serial <span class="caret"></span></th>
+                              <th>Score <span class="caret"></span></th>
+                            <th>Processor Time <span class="caret"></span></th>
+                            <th>Prints <span class="caret"></span></th>
+                            <th>Key Path <span class="caret"></span></th>
+                            <th>Finish Date <span class="caret"></span></th>
+                            <th>Finish Time <span class="caret"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if processed_list %}
+                            {% for u in processed_list %}
+                                <tr onclick="window.location='{{ u|get_path_resolve }}';">
+                                    <td>{{ u.unprocessed_img.id }}</td>
+                                    <td>{{ u.unprocessed_img.serial }}</td>
+                                    <td>{{ u.score }}</td>
+                                    <td>{{ u.processor_usage }}</td>
+                                    <td>{{ u.prints }}</td>
+                                    <td>{{ u.key_path }}</td>
+                                    <td>{{ u.finish_date }}</td>
+                                    <td>{{ u.finish_time }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <p>No images processed.</p>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+		</div>
+        {% include "imgapp/footer.html" %}
+	</body>
+</html>

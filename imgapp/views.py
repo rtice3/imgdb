@@ -1,30 +1,26 @@
-import os
-import os.path
-
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from pyftpdlib.handlers import FTPHandler
-
-from .models import UnprocessedImg
+from .models import UnprocessedImg, ProcessedImg
 
 # Create your views here.
 
 
 def index(request):
-    return HttpResponse("Hello world. This is the index.")
+    return render(request, 'imgapp/index.html', {})
 
 
-class FTPHandle(FTPHandler):
+def unprocessed_img(request):
+    unprocessed_list = UnprocessedImg.objects.all()
+    return render(request, 'imgapp/unprocessed.html', {'unprocessed_list': unprocessed_list})
 
-    def on_file_received(self, file):
-        base = os.path.basename(file)
-        serial, ext = os.path.splitext(base)
-        if(ext == '.jpg'):
-            img = UnprocessedImg(path=file, serial=serial)
-            img.save()
-        else:
-            os.remove(file)
 
-    def on_incomplete_file_received(self, file):
-        os.remove(file)
+def processed_img(request):
+    processed_list = ProcessedImg.objects.all()
+    return render(request, 'imgapp/processed.html', {'processed_list': processed_list})
+
+
+def serial_search(request, serial):
+    pass
+
+

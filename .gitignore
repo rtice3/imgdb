@@ -63,3 +63,7 @@ target/
 # FTP Stuff
 ftp
 *.jpg
+
+# Django Stuff
+*.sqlite3
+migrations
