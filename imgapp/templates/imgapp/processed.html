@@ -7,24 +7,25 @@
             <h1 class="page-header">Dashboard</h1>
             <h2 class="sub-header">Processed Images</h2>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                    <thead>
+                <table class="table table-hover">
+                    <thead class="thead-inverse">
                         <tr>
-                            <th>ID <span class="caret"></span></th>
-                            <th>Serial <span class="caret"></span></th>
-                              <th>Score <span class="caret"></span></th>
-                            <th>Processor Time <span class="caret"></span></th>
-                            <th>Prints <span class="caret"></span></th>
-                            <th>Key Path <span class="caret"></span></th>
-                            <th>Finish Date <span class="caret"></span></th>
-                            <th>Finish Time <span class="caret"></span></th>
-                            <th>Local Exists <span class="caret"></span></th>
+                            {% for h in hlist %}
+                                {% if h.sort %}
+                                    <th class="selected" onclick="sortby('{{ h.glyph }}', '{{ h.id }}')">
+                                {% else %}
+                                    <th onclick="sortby('{{ h.glyph }}', '{{ h.id }}')">
+                                {% endif %}
+                                {{ h.tag }}
+                                <span class="{{ h.glyph }}" aria-hidden="true"></span>
+                                </th>
+                            {% endfor %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% if processed_list %}
-                            {% for u in processed_list %}
-                                <tr onclick="window.location='{{ u|get_path_resolve }}';">
+                        {% if rlist %}
+                            {% for u in rlist %}
+                                <tr onclick="get_image('{{ u.id }}')">
                                     <td>{{ u.unprocessed_img.id }}</td>
                                     <td>{{ u.unprocessed_img.serial }}</td>
                                     <td>{{ u.score }}</td>

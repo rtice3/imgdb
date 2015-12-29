@@ -4,8 +4,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^unprocessed$', views.unprocessed_img, name='unprocessed'),
-    url(r'^unprocessed=(?P<serial>[0-9]+)/serial_search/$', views.unprocessed_serial_search, name='unprocessed serial search'),
-    url(r'^processed$', views.processed_img, name='processed'),
-    url(r'^processed=(?P<serial>[0-9]+)/serial_search/$', views.processed_serial_search, name='processed serial search'),
+    url(r'^(?P<mreq>\w+)!(?P<match>\w+)!(?P<qtype>\w*)=(?P<param>[^!]*)!(?P<sort>-?\w*)$', views.db_query, name='db_query'),
 ]

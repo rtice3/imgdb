@@ -7,24 +7,34 @@
             <h1 class="page-header">Dashboard</h1>
             <h2 class="sub-header">Unprocessed Images</h2>
             <div class="table-responsive">
-                <table class="table table-hover table-bordered">
-                    <thead>
+                <table class="table table-hover">
+                    <thead class="thead-inverse">
                         <tr>
-                            <th>ID <span class="caret"></span></th>
-                            <th>Serial <span class="caret"></span></th>
-                            <th>Status <span class="caret"></span></th>
-                            <th>Rcv Date <span class="caret"></span></th>
-                            <th>Rcv Time <span class="caret"></span></th>
-                            <th>Local Exists <span class="caret"></span></th>
+                            {% for h in hlist %}
+                                {% if h.sort %}
+                                    <th class="selected" onclick="sortby('{{ h.glyph }}', '{{ h.id }}')">
+                                {% else %}
+                                    <th onclick="sortby('{{ h.glyph }}', '{{ h.id }}')">
+                                {% endif %}
+                                {{ h.tag }}
+                                <span class="{{ h.glyph }}" aria-hidden="true"></span>
+                                </th>
+                            {% endfor %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% if unprocessed_list %}
-                            {% for u in unprocessed_list %}
+                        {% if rlist %}
+                            {% for u in rlist %}
                                 <tr onclick="get_image('{{ u.id }}')">
                                     <td>{{ u.id }}</td>
                                     <td>{{ u.serial }}</td>
-                                    <td>{{ u.processed }}</td>
+                                    <td>
+                                    {% if u.processed %}
+                                        <span class="circle20 green"></span>
+                                    {% else %}
+                                        <span class="circle20 red"></span>
+                                    {% endif %}
+                                    </td>
                                     <td>{{ u.receive_date }}</td>
                                     <td>{{ u.receive_time }}</td>
                                     <td>{{ u|get_path_exists }}</td>

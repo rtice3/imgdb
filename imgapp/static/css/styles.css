@@ -40,3 +40,34 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+th {
+    cursor: pointer;
+}
+
+th.selected {
+    background-color: #D8D8D8;
+}
+
+.circle20 {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.circle20.red {
+    background: red;
+}
+
+.circle20.green {
+    background: green;
+}
+
+.circle20.yellow {
+    background: yellow;
+}
+
+.circle20.blue {
+    background: blue;
+}
