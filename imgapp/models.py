@@ -29,14 +29,11 @@ class UnprocessedImg(models.Model):
 
 class ProcessedImg(models.Model):
     unprocessed_img = models.ForeignKey(UnprocessedImg, on_delete=models.CASCADE)
+    serial = models.CharField(max_length=100, default='')
     base = models.CharField(max_length=100, default='')
     ext = models.CharField(max_length=10, default='')
-    key_path = models.CharField(max_length=100, default='')
     finish_date = models.DateField(auto_now_add=True)
     finish_time = models.TimeField(auto_now_add=True)
-    processor_usage = models.DurationField()
-    score = models.DecimalField(max_digits=4, decimal_places=2)
-    prints = models.IntegerField(default=0)
 
     def get_path(self):
         return os.path.join(self.base, str(self.unprocessed_img.id) + self.ext)

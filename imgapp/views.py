@@ -105,9 +105,9 @@ def db_processed(request, match, qtype, param, sort):
     elif match == "exact" and qtype == "serial":
         rlist = ProcessedImg.objects.filter(serial__exact=param).order_by(sort)
     elif match == "exact" and qtype == "receive_date":
-        rlist = ProcessedImg.objects.filter(receive_date__exact=param).order_by(sort)
+        rlist = ProcessedImg.objects.filter(finish_date__exact=param).order_by(sort)
     elif match == "exact" and qtype == "receive_time":
-        rlist = ProcessedImg.objects.filter(receive_time__exact=param).order_by(sort)
+        rlist = ProcessedImg.objects.filter(finish_time__exact=param).order_by(sort)
     elif match == "exact" and qtype == "processed":
         rlist = ProcessedImg.objects.filter(processed__exact=param).order_by(sort)
 
@@ -121,30 +121,6 @@ def db_processed(request, match, qtype, param, sort):
         {
             "id": "unprocessed.serial",
             "tag": "Serial",
-            "sort": False,
-            "glyph": "glyphicon glyphicon-triangle-bottom",
-        },
-        {
-            "id": "score",
-            "tag": "Score",
-            "sort": False,
-            "glyph": "glyphicon glyphicon-triangle-bottom",
-        },
-        {
-            "id": "processor_usage",
-            "tag": "Processor Time",
-            "sort": False,
-            "glyph": "glyphicon glyphicon-triangle-bottom",
-        },
-        {
-            "id": "prints",
-            "tag": "Prints",
-            "sort": False,
-            "glyph": "glyphicon glyphicon-triangle-bottom",
-        },
-        {
-            "id": "key_path",
-            "tag": "Key Path",
             "sort": False,
             "glyph": "glyphicon glyphicon-triangle-bottom",
         },
